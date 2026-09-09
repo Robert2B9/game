@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://0m5u2ifp8h44"]
+
+[ext_resource type="PackedScene" uid="uid://bo4opnevbgyhh" path="res://player.tscn" id="1_a202f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_porlw"]
+albedo_color = Color(0.48497063, 0.41120526, 0.25899866, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ray1q"]
+
+[sub_resource type="Environment" id="Environment_ray1q"]
+
+[node name="Main" type="Node3D" unique_id=853474287]
+
+[node name="Environment" type="Node3D" parent="." unique_id=1334050794]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment" unique_id=48896286]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_porlw")
+mesh = SubResource("PlaneMesh_ray1q")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=413806764]
+environment = SubResource("Environment_ray1q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1675215299]
+transform = Transform3D(1, 0, 0, 0, -0.0069811773, 0.9999756, 0, -0.9999756, -0.0069811773, 0.008957326, 2.4963086, -0.004482448)
+
+[node name="Player" parent="." unique_id=189108335 instance=ExtResource("1_a202f")]
