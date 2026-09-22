@@ -5,54 +5,27 @@ namespace game.scripts.active
 {
 	public partial class Player : CharacterBody3D
 	{
-		private const float Speed = 5.0f;
+		private const float StepDistance = 5.0f;
+		private const float TurnDegrees = 90.0f;
+		
+		public override void _UnhandledInput(InputEvent @event)
+		{
+			if (@event.IsActionPressed("move_forward")) _Move(Vector3.Forward);
+			else if (@event.IsActionPressed("move_backward")) _Move(Vector3.Back);
+			else if (@event.IsActionPressed("move_left")) _Move(Vector3.Left);
+			else if (@event.IsActionPressed("move_right")) _Move(Vector3.Right);
+			else if (@event.IsActionPressed("turn_left")) _Turn(-TurnDegrees);
+			else if (@event.IsActionPressed("turn_right")) _Turn(TurnDegrees);
+		}
 
-		public override void _Ready()
+		private void _Move(Vector3 localDirection)
 		{
 			
 		}
 
-		public override void _Input(InputEvent @event)
+		private void _Turn(float degrees)
 		{
 			
-		}
-
-		public override void _Process(double delta)
-		{
-			
-		}
-
-		public override void _PhysicsProcess(double delta)
-		{
-			Vector3 velocity = Velocity;
-
-			// Get the input direction and handle the movement/deceleration.
-			// As good practice, you should replace UI actions with custom gameplay actions.
-			Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-			Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-			if (direction != Vector3.Zero)
-			{
-				velocity.X = direction.X * Speed;
-				velocity.Z = direction.Z * Speed;
-			}
-			else
-			{
-				velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-				velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
-			}
-
-			Velocity = velocity;
-			MoveAndSlide();
-		}
-
-		private void InputMovement()
-		{
-			Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-			Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-			if (Input.IsActionJustPressed("move_forward"))
-			{	
-				
-			}
 		}
 	}
 }
